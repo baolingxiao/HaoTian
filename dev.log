@@ -1,0 +1,60 @@
+
+> AI_Chatpot@1.0.0 dev /Users/dai/Desktop/AI_Chatpot
+> next dev
+
+   ▲ Next.js 15.5.4
+   - Local:        http://localhost:3000
+   - Network:      http://10.148.17.74:3000
+   - Environments: .env.local, .env
+   - Experiments (use with caution):
+     ✓ webpackMemoryOptimizations
+
+ ✓ Starting...
+ ✓ Ready in 1550ms
+ ○ Compiling / ...
+ ✓ Compiled / in 1163ms (605 modules)
+ HEAD / 200 in 1546ms
+ ✓ Compiled in 189ms (240 modules)
+ ○ Compiling /finance ...
+ ✓ Compiled /finance in 528ms (616 modules)
+Error fetching Fidelity news: TypeError: Failed to parse URL from /api/fidelity-data?type=news&limit=12
+    at async fetchFinanceNews (src/app/(news)/finance/page.tsx:18:22)
+    at async FinancePage (src/app/(news)/finance/page.tsx:210:21)
+  16 |   try {
+  17 |     // Try to fetch from Fidelity API first
+> 18 |     const response = await fetch('/api/fidelity-data?type=news&limit=12', {
+     |                      ^
+  19 |       next: { revalidate: 300 } // Cache for 5 minutes
+  20 |     });
+  21 |      {
+  [cause]: TypeError: Invalid URL
+      at async fetchFinanceNews (src/app/(news)/finance/page.tsx:18:22)
+      at async FinancePage (src/app/(news)/finance/page.tsx:210:21)
+    16 |   try {
+    17 |     // Try to fetch from Fidelity API first
+  > 18 |     const response = await fetch('/api/fidelity-data?type=news&limit=12', {
+       |                      ^
+    19 |       next: { revalidate: 300 } // Cache for 5 minutes
+    20 |     });
+    21 |      {
+    code: 'ERR_INVALID_URL',
+    input: '/api/fidelity-data?type=news&limit=12'
+  }
+}
+ GET /finance 200 in 931ms
+ ✓ Compiled /api/fidelity-data in 494ms (623 modules)
+Fidelity API error: Error: Fidelity API error: 400
+    at FidelityAPI.getQuotes (src/lib/fidelity-api.ts:67:15)
+    at async getFidelityQuotes (src/lib/fidelity-api.ts:268:10)
+    at async GET (src/app/api/fidelity-data/route.ts:14:24)
+  65 |
+  66 |       if (!response.ok) {
+> 67 |         throw new Error(`Fidelity API error: ${response.status}`);
+     |               ^
+  68 |       }
+  69 |
+  70 |       const data = await response.json();
+ GET /api/fidelity-data?type=quotes&symbols=VOO,^GSPC,^IXIC,GC=F,CL=F,USDCNY=X 200 in 1101ms
+ ○ Compiling /avatar-chat ...
+ ✓ Compiled /avatar-chat in 679ms (702 modules)
+ GET /avatar-chat 200 in 907ms

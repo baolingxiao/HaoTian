@@ -1,0 +1,87 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "AI Chatpot",
+  "version": "0.1.0",
+  "identifier": "com.aichatpot.app",
+  "build": {
+    "beforeDevCommand": "pnpm dev",
+    "devUrl": "http://localhost:3000",
+    "beforeBuildCommand": "pnpm build",
+    "frontendDist": "../out"
+  },
+  "bundle": {
+    "active": true,
+    "targets": ["dmg", "app"],
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ],
+    "resources": [],
+    "externalBin": [],
+    "copyright": "",
+    "category": "Productivity",
+    "shortDescription": "AI Chat Application",
+    "longDescription": "An AI-powered chat application with voice, avatar, and local memory.",
+    "macOS": {
+      "frameworks": [],
+      "minimumSystemVersion": "10.13",
+      "exceptionDomain": "",
+      "signingIdentity": null,
+      "providerShortName": null,
+      "entitlements": null
+    },
+    "windows": {
+      "certificateThumbprint": null,
+      "digestAlgorithm": "sha256",
+      "timestampUrl": ""
+    }
+  },
+  "app": {
+    "windows": [
+      {
+        "title": "AI Chatpot",
+        "width": 1200,
+        "height": 800,
+        "minWidth": 800,
+        "minHeight": 600,
+        "resizable": true,
+        "fullscreen": false,
+        "decorations": true,
+        "transparent": false,
+        "alwaysOnTop": false,
+        "center": true,
+        "skipTaskbar": false,
+        "fileDropEnabled": true,
+        "url": "http://localhost:3000"
+      }
+    ],
+    "security": {
+      "csp": null,
+      "devCsp": null,
+      "freezePrototype": false,
+      "dangerousDisableAssetCspModification": false,
+      "assetProtocol": {
+        "enable": true,
+        "scope": []
+      }
+    },
+    "trayIcon": null,
+    "macOSPrivateApi": false
+  },
+  "plugins": {
+    "fs": {
+      "scope": ["$APPDATA", "$APPDATA/**", "$APPDATA/duckdb/**"]
+    },
+    "store": {
+      "scope": ["$APPDATA/**"]
+    },
+    "dialog": {
+      "open": true,
+      "save": true
+    }
+  }
+}
+

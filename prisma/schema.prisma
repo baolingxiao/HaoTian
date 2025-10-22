@@ -1,0 +1,65 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  createdAt DateTime @default(now())
+  sessions  Session[]
+  chats     Chat[]
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+}
+
+model Chat {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  title     String?
+  createdAt DateTime @default(now())
+  messages  Message[]
+  feedbacks Feedback[]
+}
+
+model Message {
+  id        String   @id @default(cuid())
+  chatId    String
+  chat      Chat     @relation(fields: [chatId], references: [id])
+  role      String   // "user" | "assistant" | "system"
+  content   String
+  tokens    Int?
+  createdAt DateTime @default(now())
+}
+
+model Feedback {
+  id        String   @id @default(cuid())
+  chatId    String
+  chat      Chat     @relation(fields: [chatId], references: [id])
+  messageId String?
+  useful    Boolean
+  note      String?
+  createdAt DateTime @default(now())
+}
+
+model Metric {
+  id        String   @id @default(cuid())
+  kind      String   // "latency"|"error"|"cost"|"429"|...
+  label     String?
+  value     Float?
+  extra     Json?
+  createdAt DateTime @default(now())
+}
+
+
+
